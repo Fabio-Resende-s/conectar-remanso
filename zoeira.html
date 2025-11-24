@@ -7,19 +7,7 @@
 </head>
 <body>
   <h1>Olha só as cores mudando! 😄</h1>
-
-  <script>
-    let i = 0;
-    const colors = ['#FF5733', '#33FF57', '#3357FF', '#F333FF', '#33FFF5', '#F5FF33', '#FF33A8', '#A833FF', '#33FFA8', '#FFA833'];
-
-    const interval = setInterval(() => {
-      document.body.style.backgroundColor = colors[i % colors.length];
-      i++;
-      if (i > 30) { // depois de 30 trocas para e volta ao normal
-        clearInterval(interval);
-        document.body.style.backgroundColor = '';
-      }
-    }, 200);
-  </script>
+<script src="script.js"></script>
+ 
 </body>
 </html>
