@@ -1,845 +1,139 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Para Hanna ❤️</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #ffd6e7, #c1f0ff);
-        padding: 15px;
-        overflow-x: hidden;
-      }
-
-      .container {
-        position: relative;
-        width: 100%;
-        max-width: 900px;
-        background-color: rgba(255, 255, 255, 0.98);
-        border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        padding: 20px;
-        margin: 10px 0;
-      }
-
-      /* HEADER PERSONALIZADO COM CORAÇÕES FLUTUANTES */
-      .header {
-        text-align: center;
-        margin-bottom: 20px;
-        padding: 25px 15px;
-        border-bottom: 2px dashed #ff7eb9;
-        background: linear-gradient(to right, #ff7eb3, #ff758c);
-        color: white;
-        position: relative;
-        overflow: hidden;
-        border-radius: 15px;
-      }
-
-      .header h1 {
-        font-family: "Dancing Script", cursive;
-        color: white;
-        font-size: clamp(2rem, 8vw, 3.5rem);
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        animation: titleFloat 3s ease-in-out infinite;
-        line-height: 1.2;
-      }
-
-      .header p {
-        color: rgba(255, 255, 255, 0.95);
-        font-size: clamp(1rem, 4vw, 1.3rem);
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.4;
-        padding: 0 10px;
-      }
-
-      .heart-icon {
-        color: #ffebee;
-        font-size: clamp(1.5rem, 6vw, 1.8rem);
-        margin: 0 5px;
-        animation: heartbeat 1.5s infinite;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-      }
-
-      /* Corações flutuantes */
-      .floating-hearts {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        z-index: 0;
-      }
-
-      .floating-heart {
-        position: absolute;
-        color: rgba(255, 255, 255, 0.4);
-        font-size: clamp(1rem, 4vw, 1.5rem);
-        animation: float 6s linear infinite;
-      }
-
-      /* Animações para o header */
-      @keyframes heartbeat {
-        0% {
-          transform: scale(1);
-        }
-        5% {
-          transform: scale(1.1);
-        }
-        10% {
-          transform: scale(1);
-        }
-        15% {
-          transform: scale(1.2);
-        }
-        20% {
-          transform: scale(1);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      @keyframes titleFloat {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-5px);
-        }
-      }
-
-      @keyframes float {
-        0% {
-          transform: translateY(100px) rotate(0deg);
-          opacity: 0;
-        }
-        10% {
-          opacity: 0.8;
-        }
-        90% {
-          opacity: 0.8;
-        }
-        100% {
-          transform: translateY(-100px) rotate(360deg);
-          opacity: 0;
-        }
-      }
-
-      /* CARDS */
-      .card-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 25px;
-      }
-
-      .card {
-        width: 100%;
-        max-width: 300px;
-        height: 350px;
-        perspective: 1000px;
-      }
-
-      .card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.8s;
-        transform-style: preserve-3d;
-        cursor: pointer;
-        touch-action: manipulation;
-      }
-
-      .card:hover .card-inner,
-      .card:active .card-inner {
-        transform: rotateY(180deg);
-      }
-
-      .card-front,
-      .card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        border-radius: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 15px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      }
-
-      .card-front {
-        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-        color: #fff;
-      }
-
-      .card-back {
-        background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
-        color: #333;
-        transform: rotateY(180deg);
-        overflow-y: auto;
-      }
-
-      .card h3 {
-        font-size: clamp(1.4rem, 5vw, 1.8rem);
-        margin-bottom: 12px;
-      }
-
-      .card p {
-        font-size: clamp(0.95rem, 4vw, 1.1rem);
-        line-height: 1.4;
-      }
-
-      .card-icon {
-        font-size: clamp(3rem, 12vw, 4rem);
-        margin-bottom: 15px;
-        color: rgba(255, 255, 255, 0.9);
-      }
-
-      /* MESSAGE BOX */
-      .message-box {
-        background-color: #fff9fc;
-        border-radius: 15px;
-        padding: 20px;
-        margin-bottom: 25px;
-        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.05);
-        border-left: 5px solid #ff4081;
-      }
-
-      .message-box h3 {
-        color: #ff4081;
-        margin-bottom: 12px;
-        font-size: clamp(1.3rem, 5vw, 1.6rem);
-      }
-
-      .message-box p {
-        color: #555;
-        font-size: clamp(1rem, 4vw, 1.2rem);
-        line-height: 1.5;
-      }
-
-      .message-input {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 15px;
-      }
-
-      textarea {
-        width: 100%;
-        height: 120px;
-        padding: 12px;
-        border-radius: 10px;
-        border: 2px solid #e0e0e0;
-        font-size: clamp(0.9rem, 4vw, 1rem);
-        resize: vertical;
-        transition: border 0.3s;
-        font-family: inherit;
-      }
-
-      textarea:focus {
-        outline: none;
-        border-color: #ff4081;
-        box-shadow: 0 0 0 3px rgba(255, 64, 129, 0.1);
-      }
-
-      /* BUTTONS */
-      .buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 20px;
-      }
-
-      button {
-        padding: 14px 20px;
-        border: none;
-        border-radius: 50px;
-        font-size: clamp(1rem, 4vw, 1.1rem);
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-        touch-action: manipulation;
-      }
-
-      #revealBtn {
-        background: linear-gradient(to right, #ff4081, #ff7eb9);
-        color: white;
-      }
-
-      #sendBtn {
-        background: linear-gradient(to right, #36d1dc, #5b86e5);
-        color: white;
-      }
-
-      #resetBtn {
-        background: linear-gradient(to right, #ffb347, #ffcc33);
-        color: white;
-      }
-
-      button:active {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-      }
-
-      button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      /* HIDDEN MESSAGE */
-      .hidden-message {
-        display: none;
-        text-align: center;
-        padding: 25px 20px;
-        background: linear-gradient(45deg, #ffecd2, #fcb69f);
-        border-radius: 15px;
-        margin-top: 25px;
-        animation: fadeIn 1s;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      .hidden-message h2 {
-        color: #ff4081;
-        font-size: clamp(1.6rem, 6vw, 2.2rem);
-        margin-bottom: 15px;
-      }
-
-      .hidden-message p {
-        font-size: clamp(1.05rem, 4vw, 1.3rem);
-        color: #333;
-        margin-bottom: 15px;
-        line-height: 1.5;
-      }
-
-      .signature {
-        text-align: right;
-        margin-top: 20px;
-        font-style: italic;
-        color: #777;
-        font-size: clamp(0.95rem, 4vw, 1.1rem);
-      }
-
-      .footer {
-        text-align: center;
-        margin-top: 25px;
-        color: #666;
-        font-size: clamp(0.8rem, 3vw, 0.9rem);
-        padding: 0 10px;
-      }
-
-      /* RESPONSIVE ADJUSTMENTS */
-      @media (min-width: 768px) {
-        body {
-          align-items: center;
-          padding: 20px;
-        }
-        
-        .container {
-          padding: 30px;
-        }
-        
-        .header {
-          padding: 30px 20px;
-          margin-bottom: 30px;
-        }
-        
-        .card-container {
-          gap: 25px;
-          margin-bottom: 30px;
-        }
-        
-        .card {
-          width: calc(33.333% - 17px);
-          max-width: none;
-        }
-        
-        .buttons {
-          flex-direction: row;
-          gap: 15px;
-        }
-        
-        button {
-          width: auto;
-          padding: 15px 25px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        body {
-          padding: 10px;
-        }
-        
-        .container {
-          padding: 15px;
-          border-radius: 15px;
-        }
-        
-        .header {
-          padding: 20px 10px;
-          border-radius: 12px;
-        }
-        
-        .card {
-          height: 320px;
-        }
-        
-        .card-front,
-        .card-back {
-          padding: 12px;
-        }
-        
-        .message-box {
-          padding: 15px;
-        }
-        
-        textarea {
-          height: 100px;
-        }
-        
-        .hidden-message {
-          padding: 20px 15px;
-        }
-      }
-
-      /* ORIENTAÇÃO LANDSCAPE */
-      @media (max-height: 600px) and (orientation: landscape) {
-        body {
-          align-items: flex-start;
-          padding: 10px;
-        }
-        
-        .container {
-          margin: 10px 0;
-          padding: 15px;
-        }
-        
-        .card-container {
-          flex-direction: row;
-          flex-wrap: nowrap;
-          overflow-x: auto;
-          justify-content: flex-start;
-          padding-bottom: 10px;
-        }
-        
-        .card {
-          flex: 0 0 auto;
-          width: 250px;
-          height: 300px;
-          margin-right: 15px;
-        }
-        
-        .buttons {
-          flex-direction: row;
-          flex-wrap: wrap;
-        }
-        
-        button {
-          flex: 1;
-          min-width: 150px;
-        }
-      }
-
-      /* SCROLLBAR STYLING */
-      .card-back::-webkit-scrollbar {
-        width: 6px;
-      }
-      
-      .card-back::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 10px;
-      }
-      
-      .card-back::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-      }
-    </style>
-  </head>
-  <body>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bom Dia, Meu Amor! ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
     <div class="container">
-      <!-- HEADER PERSONALIZADO -->
-      <div class="header">
-        <div class="floating-hearts" id="floatingHearts"></div>
-        <h1>Para Hanna <i class="fas fa-heart heart-icon"></i></h1>
-        <p>
-          Um cartão especial feito com carinho por um programador em
-          desenvolvimento
-        </p>
-      </div>
+        <!-- Header com nome -->
+        <header>
+            <h1>Para <span class="name-highlight">Hanna</span>, Minha Princesa</h1>
+            <p class="subtitle">Uma mensagem especial para começar seu dia</p>
+        </header>
 
-      <div class="card-container">
-        <div class="card">
-          <div class="card-inner">
-            <div class="card-front">
-              <i class="fas fa-heart card-icon"></i>
-              <h3>Desde o primeiro momento</h3>
-              <p>Clique para ver a mensagem</p>
-            </div>
-            <div class="card-back">
-              <h3>Um sentimento nasceu</h3>
-              <p>
-                   Desde que te conheci, um sentimento bonito nasceu em mim.
-        Ele é simples, sincero e cheio de carinho.
-        Talvez em silêncio, mas sempre verdadeiro,
-        crescendo a cada detalhe seu.
-              </p>
-            </div>
-          </div>
+        <!-- Relógio e data -->
+        <div class="time-section">
+            <div class="clock" id="clock">00:00:00</div>
+            <div class="date" id="date">Carregando data...</div>
         </div>
 
-        <div class="card">
-          <div class="card-inner">
-            <div class="card-front">
-              <i class="fas fa-star card-icon"></i>
-              <h3>Você é...</h3>
-              <p>Clique para ver a mensagem</p>
+        <!-- Mensagem principal -->
+        <main class="message-container">
+            <div class="message-card">
+                <div class="heart-icon"><i class="fas fa-heart"></i></div>
+                <h2>Bom Dia, Minha Princesa! 🌞</h2>
+                
+                <div class="message-content">
+                    <p id="main-message">Que este novo dia seja repleto de alegrias, conquistas e motivos para sorrir.</p>
+                    
+                   <div class="personal-message">
+  <p>Hanna, bom dia 🙂</p>
+
+  <p>
+    É bom quando a gente encontra pessoas  
+    que tornam o dia mais tranquilo.
+  </p>
+
+  <p>
+    Estou aprendendo programação e usando isso  
+    para criar coisas simples, mas sinceras.
+  </p>
+</div>
+                    
+                    <div class="quote">
+                        <i class="fas fa-quote-left"></i>
+                        <p class="quote-text">O amor não se vê com os olhos, mas com o coração.</p>
+                        <p class="quote-author">- William Shakespeare</p>
+                    </div>
+                </div>
             </div>
-            <div class="card-back">
-              <h3>Especial</h3>
-              <p>
-                Você é uma pessoa incrível que ilumina meus dias. Sua presença
-                na minha vida tem um significado especial. Sem perceber, você se tornou um pensamento bonito  
-        que aparece do nada e faz sorrir.  
-        Talvez você não saiba, mas sua existência faz diferença.
-              </p>
+
+            <!-- Galeria de memórias (fictícia - você pode adicionar fotos reais depois) -->
+            <div class="memories-section">
+                <h3><i class="fas fa-images"></i> Nossas Memórias</h3>
+                <div class="memories-grid">
+                    <div class="memory-item">📸 Primeiro encontro</div>
+                    <div class="memory-item">🎉 Seu sorriso</div>
+                    <div class="memory-item">🌟 Momentos especiais</div>
+                    <div class="memory-item">💖 Nosso amor</div>
+                </div>
             </div>
-          </div>
+
+            <!-- Botão secreto -->
+            <div class="secret-section">
+                <button id="secret-btn" class="secret-btn">
+                    <i class="fas fa-lock"></i> Clique para uma surpresa!
+                </button>
+                <div id="secret-message" class="secret-message hidden">
+                    <h3>❤️ Mensagem Secreta ❤️</h3>
+                    <p>Hanna, estou aprendendo programação para criar coisas que possam te impressionar e mostrar o quanto você é especial para mim. Cada linha de código é escrita com você em meu pensamento.</p>
+                    <p>Te amo mais do que palavras podem expressar!</p>
+                    <p class="signature">— Talvez um dia, no tempo certo,  
+    esse carinho que cresce em silêncio  
+    se transforme em algo ainda mais bonito. ❤️</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Contador personalizado -->
+        <div class="counter-section">
+            <h3><i class="fas fa-calendar-heart"></i> Cada dia ao seu lado é especial</h3>
+            <div class="counter">
+                <div class="counter-item">
+                    <div class="counter-number" id="love-days">1</div>
+                    <div class="counter-label">Dia de Amor</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" id="smiles">∞</div>
+                    <div class="counter-label">Sorrisos</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" id="hearts">1000</div>
+                    <div class="counter-label">Corações</div>
+                </div>
+            </div>
         </div>
 
-        <div class="card">
-          <div class="card-inner">
-            <div class="card-front">
-              <i class="fas fa-code card-icon"></i>
-              <h3>Programador</h3>
-              <p>Clique para ver a mensagem</p>
+        <!-- Player de música -->
+        <div class="music-player">
+            <h3><i class="fas fa-music"></i> Música para seu dia</h3>
+            <div class="player-controls">
+                <button id="play-btn" class="music-btn">
+                    <i class="fas fa-play"></i> Tocar Música
+                </button>
+                <button id="pause-btn" class="music-btn">
+                    <i class="fas fa-pause"></i> Pausar
+                </button>
             </div>
-            <div class="card-back">
-              <h3>Minha Jornada</h3>
-              <p>
-                Estou me tornando programador e quero usar minhas habilidades
-                para criar coisas especiais para você.
-              </p>
+            <audio id="background-music" loop>
+                <source src="./img/F2mp_download_instagram_mp3_320 (4).mp3">
+                Seu navegador não suporta o elemento de áudio.
+            </audio>
+            <p class="music-note">🎵 Música suave para alegrar seu dia</p>
+        </div>
+
+        <!-- Rodapé -->
+        <footer>
+            <p>Feito com <i class="fas fa-heart heartbeat"></i> especialmente para você, Hanna</p>
+            <p class="footer-note">Código escrito com carinho enquanto aprendo HTML, CSS e JavaScript</p>
+            <div class="footer-hearts">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="message-box">
-        <h3><i class="fas fa-envelope"></i> Mensagem Especial</h3>
-        <p>
-          Hanna, queria te dizer que mesmo à distância, você está sempre nos
-          meus pensamentos. Cada linha de código que escrevo tem um pouco do
-          carinho que sinto por você.
-        </p>
-
-        <div class="message-input">
-          <label for="personalMessage">Personalize esta mensagem:</label>
-          <textarea
-            id="personalMessage"
-            placeholder="Digite sua mensagem personalizada aqui..."
-          >
-Hanna, espero que este cartão digital te surpreenda assim como você me surpreende todos os dias. Estou aqui, aprendendo a ser programador e tentando conquistar seu coração. Você é incrível!</textarea
-          >
-        </div>
-      </div>
-
-      <div class="buttons">
-        <button id="revealBtn">
-          <i class="fas fa-gift"></i> Revelar Surpresa
-        </button>
-        <button id="sendBtn">
-          <i class="fas fa-paper-plane"></i> Enviar Mensagem
-        </button>
-        <button id="resetBtn"><i class="fas fa-redo"></i> Reiniciar</button>
-      </div>
-
-      <div class="hidden-message" id="hiddenMessage">
-        <h2>E o mais importante...</h2>
-        <p>
-          Eu me importo muito com você, Hanna. Cada conversa nossa, mesmo que
-          breve, significa muito para mim.
-        </p>
-        <p>
-          Espero que possamos nos entender melhor e quem sabe construir algo
-          especial juntos.
-        </p>
-        <p>
-          Você é a gatinha que este programador em desenvolvimento quer
-          conquistar! ❤️
-        </p>
-
-        <div class="signature">
-          <p>Com carinho,<br />Seu programador favorito</p>
-        </div>
-      </div>
-
-      <div class="footer">
-        <p>
-          Cartão criado com HTML, CSS e JavaScript • Atualize a página para ver
-          a animação novamente
-        </p>
-      </div>
+        </footer>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const revealBtn = document.getElementById("revealBtn");
-        const sendBtn = document.getElementById("sendBtn");
-        const resetBtn = document.getElementById("resetBtn");
-        const hiddenMessage = document.getElementById("hiddenMessage");
-        const personalMessage = document.getElementById("personalMessage");
-        const cards = document.querySelectorAll(".card-inner");
+    <!-- Efeitos de confete -->
+    <canvas id="confetti-canvas"></canvas>
 
-        // Função para criar corações flutuantes no header
-        function createFloatingHearts() {
-          const container = document.getElementById("floatingHearts");
-          const heartCount = window.innerWidth < 768 ? 10 : 15;
-
-          for (let i = 0; i < heartCount; i++) {
-            const heart = document.createElement("div");
-            heart.classList.add("floating-heart");
-            heart.innerHTML = '<i class="fas fa-heart"></i>';
-
-            // Posição aleatória
-            const leftPos = Math.random() * 100;
-            const delay = Math.random() * 5;
-            const duration = 6 + Math.random() * 6;
-
-            heart.style.left = `${leftPos}%`;
-            heart.style.animationDelay = `${delay}s`;
-            heart.style.animationDuration = `${duration}s`;
-
-            // Tamanho aleatório
-            const size = 0.6 + Math.random() * 1.0;
-            heart.style.fontSize = `${size}rem`;
-
-            container.appendChild(heart);
-          }
-        }
-
-        // Inicializar corações flutuantes no header
-        createFloatingHearts();
-
-        // Revelar mensagem oculta
-        revealBtn.addEventListener("click", function () {
-          hiddenMessage.style.display = "block";
-          revealBtn.innerHTML =
-            '<i class="fas fa-heart"></i> Mensagem Revelada!';
-          revealBtn.style.background =
-            "linear-gradient(to right, #ff7eb9, #ff4081)";
-
-          // Rolagem suave até a mensagem
-          hiddenMessage.scrollIntoView({ behavior: "smooth", block: "start" });
-
-          // Efeito de corações extras
-          createHearts();
-        });
-
-        // Enviar mensagem (simulação)
-        sendBtn.addEventListener("click", function () {
-          if (personalMessage.value.trim() === "") {
-            alert("Por favor, escreva uma mensagem personalizada!");
-            return;
-          }
-
-          sendBtn.innerHTML = '<i class="fas fa-check"></i> Mensagem Enviada!';
-          sendBtn.style.background =
-            "linear-gradient(to right, #5b86e5, #36d1dc)";
-
-          // Simular envio
-          setTimeout(() => {
-            alert("Mensagem enviada com sucesso para Hanna! (Simulação)");
-          }, 500);
-        });
-
-        // Reiniciar cartão
-        resetBtn.addEventListener("click", function () {
-          hiddenMessage.style.display = "none";
-          revealBtn.innerHTML = '<i class="fas fa-gift"></i> Revelar Surpresa';
-          revealBtn.style.background =
-            "linear-gradient(to right, #ff4081, #ff7eb9)";
-          sendBtn.innerHTML =
-            '<i class="fas fa-paper-plane"></i> Enviar Mensagem';
-          sendBtn.style.background =
-            "linear-gradient(to right, #36d1dc, #5b86e5)";
-          personalMessage.value =
-            "Hanna, espero que este cartão digital te surpreenda assim como você me surpreende todos os dias. Estou aqui, aprendendo a ser programador e tentando conquistar seu coração. Você é incrível!";
-
-          // Resetar cards
-          cards.forEach((card) => {
-            card.style.transform = "rotateY(0deg)";
-          });
-
-          // Rolagem para o topo
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        // Efeito de corações flutuantes extras ao clicar em revelar
-        function createHearts() {
-          const container = document.querySelector(".container");
-          const colors = [
-            "#ff4081",
-            "#ff7eb9",
-            "#36d1dc",
-            "#5b86e5",
-            "#ffb347",
-          ];
-
-          for (let i = 0; i < 10; i++) {
-            const heart = document.createElement("div");
-            heart.innerHTML = "❤";
-            heart.style.position = "absolute";
-            heart.style.color =
-              colors[Math.floor(Math.random() * colors.length)];
-            heart.style.fontSize = Math.random() * 15 + 10 + "px";
-            heart.style.left = Math.random() * 90 + 5 + "%";
-            heart.style.top = Math.random() * 90 + 5 + "%";
-            heart.style.opacity = "0.7";
-            heart.style.pointerEvents = "none";
-            heart.style.zIndex = "9999";
-            heart.style.animation = `floatUp ${
-              Math.random() * 3 + 2
-            }s linear forwards`;
-
-            container.appendChild(heart);
-
-            // Remover após animação
-            setTimeout(() => {
-              heart.remove();
-            }, 5000);
-          }
-
-          // Adicionar estilo de animação
-          if (!document.querySelector('#floatUpStyle')) {
-            const style = document.createElement("style");
-            style.id = 'floatUpStyle';
-            style.textContent = `
-                      @keyframes floatUp {
-                          0% {
-                              transform: translateY(0) rotate(0deg);
-                              opacity: 0.7;
-                          }
-                          100% {
-                              transform: translateY(-80px) rotate(20deg);
-                              opacity: 0;
-                          }
-                      }
-                  `;
-            document.head.appendChild(style);
-          }
-        }
-
-        // Efeito de digitação no título
-        const title = document.querySelector(".header h1");
-        const originalText = title.innerHTML;
-        title.innerHTML = "";
-
-        let i = 0;
-        function typeWriter() {
-          if (i < originalText.length) {
-            title.innerHTML += originalText.charAt(i);
-            i++;
-            setTimeout(typeWriter, 50);
-          }
-        }
-
-        // Iniciar efeito de digitação após um breve delay
-        setTimeout(typeWriter, 500);
-
-        // Adicionar efeito de clique para criar corações extras no header
-        document
-          .querySelector(".header")
-          .addEventListener("click", function (e) {
-            // Criar coração no local do clique
-            const heart = document.createElement("div");
-            heart.innerHTML = '<i class="fas fa-heart"></i>';
-            heart.style.position = "absolute";
-            heart.style.color = "#ffebee";
-            heart.style.fontSize = "1.5rem";
-            heart.style.left = `${
-              e.clientX - this.getBoundingClientRect().left
-            }px`;
-            heart.style.top = `${
-              e.clientY - this.getBoundingClientRect().top
-            }px`;
-            heart.style.transform = "translate(-50%, -50%)";
-            heart.style.pointerEvents = "none";
-            heart.style.zIndex = "100";
-            heart.style.animation = "heartbeat 0.8s ease-out";
-
-            this.appendChild(heart);
-
-            // Remover após a animação
-            setTimeout(() => {
-              heart.remove();
-            }, 800);
-          });
-
-        // Melhor suporte a toque para os cards
-        cards.forEach(card => {
-          card.addEventListener('touchstart', function() {
-            this.style.transform = this.style.transform === 'rotateY(180deg)' 
-              ? 'rotateY(0deg)' 
-              : 'rotateY(180deg)';
-          });
-        });
-
-        // Redimensionar corações quando a janela mudar de tamanho
-        let resizeTimeout;
-        window.addEventListener('resize', function() {
-          clearTimeout(resizeTimeout);
-          resizeTimeout = setTimeout(function() {
-            const floatingHearts = document.getElementById('floatingHearts');
-            floatingHearts.innerHTML = '';
-            createFloatingHearts();
-          }, 250);
-        });
-      });
-    </script>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
