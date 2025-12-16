@@ -1,260 +1,830 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Surpresa para Hanna</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para minha amiga Suelane! 🎓</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #6a11cb 0%, #ab0bbd 100%);
+        color: white;
+        min-height: 100vh;
+        padding: 20px;
+        overflow-x: hidden;
+      }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+      }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f5c3d4, #b19cd9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+      .header {
+        margin-bottom: 30px;
+        animation: fadeIn 1s ease-out;
+      }
 
-.container {
-    max-width: 900px;
-    width: 100%;
-    text-align: center;
-}
+      .emoji-title {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+      }
 
-.header h1 {
-    color: #6a0dad;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        color: #fff;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        font-family: "Dancing Script", cursive;
+      }
 
-.header p {
-    color: #6a0dad;
-    margin-bottom: 20px;
-}
+      .subtitle {
+        font-size: 1.2rem;
+        color: #e6f0ff;
+        margin-bottom: 5px;
+      }
 
-.instructions {
-    background: rgba(255,255,255,0.8);
-    padding: 10px 20px;
-    border-radius: 50px;
-    display: inline-block;
-    color: #6a0dad;
-    margin-bottom: 20px;
-}
+      .friend-note {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 12px;
+        border-radius: 15px;
+        margin: 15px 0;
+        font-size: 0.95rem;
+        border-left: 4px solid #ffd166;
+      }
 
-/* CAIXA */
-.surprise-box {
-    width: 260px;
-    height: 260px;
-    margin: 0 auto;
-    cursor: pointer;
-    perspective: 1000px;
-}
+      .surprise-container {
+        position: relative;
+        margin: 30px auto;
+        width: 280px;
+        height: 280px;
+        perspective: 800px;
+      }
 
-.box {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #ff6b9d, #6a0dad);
-    border-radius: 20px;
-    position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.8s ease;
-}
+      .surprise-box {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
 
-.box-lid {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 60px;
-    background: linear-gradient(45deg, #ff4081, #7b1fa2);
-    border-radius: 20px 20px 0 0;
-    transform-origin: top;
-    transition: transform 0.8s ease;
-}
+      .box-front,
+      .box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 25px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+      }
 
-.box-content {
-    color: white;
-    z-index: 2;
-}
+      .box-front {
+        background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+        color: white;
+      }
 
-.box-content i {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
-    color: #ffeb3b;
-}
+      .box-back {
+        background: linear-gradient(45deg, #00b09b, #96c93d);
+        transform: rotateY(180deg);
+        display: none;
+      }
 
-/* CONTEÚDO */
-.revealed-content {
-    display: none;
-    margin-top: 30px;
-    animation: fadeIn 1s ease forwards;
-}
+      .box-icon {
+        font-size: 4rem;
+        margin-bottom: 15px;
+        animation: heartbeat 1.5s infinite;
+      }
 
-@keyframes fadeIn {
-    from {opacity:0}
-    to {opacity:1}
-}
+      .box-text {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
 
-.message {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    margin-bottom: 30px;
-    position: relative;
-}
+      .box-instruction {
+        font-size: 1rem;
+        opacity: 0.95;
+        font-weight: 300;
+      }
 
-.message::before {
-    content:'';
-    position:absolute;
-    left:0;
-    top:0;
-    width:8px;
-    height:100%;
-    background: linear-gradient(#ff6b9d,#6a0dad);
-}
+      .exploded .box-front {
+        animation: explode 0.7s forwards;
+      }
 
-.message h2 {
-    color: #6a0dad;
-    margin-bottom: 15px;
-}
+      .exploded .box-back {
+        display: flex;
+        animation: appear 0.8s 0.7s forwards;
+        opacity: 0;
+      }
 
-.message p {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    color: #333;
-}
+      .celebration-content {
+        display: none;
+        margin-top: 30px;
+        animation: slideUp 0.8s ease-out;
+      }
 
-.signature {
-    text-align: right;
-    color: #ff6b9d;
-    font-weight: bold;
-    font-size: 1.3rem;
-}
+      /* ÁREA DA FOTO - NOVO */
+      .photo-area {
+        width: 100%;
+        margin: 20px 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+      }
 
-/* FOTO */
-.single-photo {
-    max-width: 420px;
-    margin: 0 auto;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
-    animation: fadeIn 2s ease;
-}
+      .photo-frame {
+        width: 100%;
+        height: 300px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+        overflow: hidden;
+        position: relative;
+      }
 
-.single-photo img {
-    width: 100%;
-    display: block;
-}
+      .photo-placeholder {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+      }
 
-/* EXPLOSÃO */
-.explosion {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999;
-}
-</style>
-</head>
+      .photo-icon {
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 15px;
+      }
 
-<body>
+      .photo-instruction {
+        font-size: 1rem;
+        margin-top: 10px;
+      }
 
-<div class="container">
+      /* Para quando a foto for carregada */
+      .photo-loaded {
+        width: 100%;
+        height: 500%;
+        object-fit: cover;
+        border-radius: 15px;
+        display: none;
+      }
 
-    <div class="header">
-        <h1>✨ Surpresa para Hanna ✨</h1>
-        <p>Clique na caixa para abrir</p>
-    </div>
+      .upload-btn {
+        background: #4ecdc4;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s;
+        margin: 10px auto;
+      }
 
-    <div class="instructions">
-        <i class="fas fa-mouse-pointer"></i> Clique na caixa colorida
-    </div>
+      .upload-btn:hover {
+        background: #2a9d8f;
+        transform: scale(1.05);
+      }
 
-    <div class="surprise-box" id="surpriseBox">
-        <div class="box">
-            <div class="box-lid" id="boxLid"></div>
-            <div class="box-content">
-                <i class="fas fa-gift"></i>
-                <h2>Para Hanna</h2>
+      .photo-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .celebration-icon {
+        font-size: 3.5rem;
+        color: #ffd166;
+        margin-bottom: 20px;
+      }
+
+      .celebration-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: #ffd166;
+        font-family: "Dancing Script", cursive;
+      }
+
+      .celebration-message {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: #f0f8ff;
+      }
+
+      .friend-message {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 15px;
+        padding: 25px;
+        margin-top: 20px;
+        text-align: left;
+        border-left: 5px solid #ff6b6b;
+      }
+
+      .friend-message h3 {
+        color: #ffd166;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+      }
+
+      .friend-message p {
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+        color: #f0f8ff;
+      }
+
+      .signature {
+        text-align: right;
+        margin-top: 20px;
+        font-family: "Dancing Script", cursive;
+        font-size: 1.6rem;
+        color: #ffd166;
+      }
+
+      .next-steps {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .step {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px 15px;
+        border-radius: 15px;
+        width: 48%;
+        margin-bottom: 15px;
+        transition: transform 0.3s;
+      }
+
+      .step:hover {
+        transform: translateY(-5px);
+      }
+
+      .step-icon {
+        font-size: 2rem;
+        color: #4ecdc4;
+        margin-bottom: 10px;
+      }
+
+      .step-text {
+        font-size: 0.9rem;
+        color: #e6f0ff;
+      }
+
+      .emoji-rain {
+        position: fixed;
+        font-size: 1.5rem;
+        pointer-events: none;
+        z-index: 1000;
+        opacity: 0;
+      }
+
+      .explosion-particle {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 100;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes explode {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(0);
+          opacity: 0;
+          display: none;
+        }
+      }
+
+      @keyframes appear {
+        0% {
+          opacity: 0;
+          transform: scale(0.5) rotateY(180deg);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotateY(180deg);
+        }
+      }
+
+      @keyframes emojiFall {
+        0% {
+          transform: translateY(-100px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(1000px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      footer {
+        margin-top: 40px;
+        padding: 20px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.85rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .whatsapp-share {
+        background: #25d366;
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 20px 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        transition: all 0.3s;
+      }
+
+      .whatsapp-share:hover {
+        background: #128c7e;
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+        }
+        h1 {
+          font-size: 1.9rem;
+        }
+        .emoji-title {
+          font-size: 2.4rem;
+        }
+        .subtitle {
+          font-size: 1.1rem;
+        }
+        .surprise-container {
+          width: 250px;
+          height: 250px;
+        }
+        .box-icon {
+          font-size: 3.5rem;
+        }
+        .box-text {
+          font-size: 1.4rem;
+        }
+        .step {
+          width: 100%;
+        }
+        .photo-frame {
+          height: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="emoji-title">🎓✨🎉</div>
+        <h1>Para minha amiga Suelane!</h1>
+        <p class="subtitle">Celebrando essa conquista incrível!</p>
+        <p class="subtitle">Da escola para a faculdade - que jornada!</p>
+
+        <div class="friend-note">
+          <i class="fas fa-heart" style="color: #ff6b6b; margin-right: 8px"></i>
+          Feito com carinho por um amigo que se importa
+        </div>
+      </div>
+
+      <div class="surprise-container">
+        <div class="surprise-box" id="surpriseBox">
+          <div class="box-front">
+            <div class="box-icon">
+              <i class="fas fa-gift"></i>
             </div>
+            <div class="box-text">Surpresa!</div>
+            <div class="box-instruction">Toque para abrir 🎁</div>
+          </div>
+          <div class="box-back">
+            <div class="box-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="box-text">Parabéns!</div>
+            <div class="box-instruction">Você merece! 🎓</div>
+          </div>
         </div>
+      </div>
+
+      <div class="celebration-content" id="celebrationContent">
+        <!-- ÁREA DA FOTO - VOCÊ VAI COLOCAR AQUI -->
+        <div class="photo-area">
+          <h3 style="color: #ffd166; margin-bottom: 15px; font-size: 1.3rem">
+            <i class="fas fa-camera"></i> Foto Especial da Formatura
+          </h3>
+
+          <div class="photo-frame" id="photoFrame">
+            <div class="photo-placeholder" id="photoPlaceholder">
+              <div class="photo-icon">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+              <p>Foto da Suelane formada!</p>
+              <p class="photo-instruction">
+                (Você pode adicionar uma foto aqui)
+              </p>
+            </div>
+
+            <!-- AQUI VAI A FOTO DA SUELANE -->
+            <img
+              id="suelanePhoto"
+              class="photo-loaded"
+              src="./img/WhatsApp Image 2025-12-15 at 21.18.35.jpeg"
+              alt="Foto da Suelane formada"
+              style="display: block"
+            />
+          </div>
+
+          <button class="upload-btn" id="uploadBtn">
+            <i class="fas fa-upload"></i> Escolher Foto da Suelane
+          </button>
+
+          <p
+            style="
+              font-size: 0.9rem;
+              color: rgba(255, 255, 255, 0.7);
+              margin-top: 10px;
+            "
+          >
+            Escolha uma foto dela formada ou na faculdade!
+          </p>
+        </div>
+
+        <div class="photo-card">
+          <div class="celebration-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <h2 class="celebration-title">Formada com Mérito!</h2>
+          <p class="celebration-message">
+            Suelane, que orgulho dessa conquista! Terminar a escola é um marco
+            importante, e agora você está seguindo para a faculdade. Sua
+            dedicação está dando frutos incríveis!
+          </p>
+          <div style="font-size: 2rem; color: #ffd166; margin: 15px 0">
+            🎓 → 🏫 → 🌟
+          </div>
+        </div>
+
+        <div class="next-steps">
+          <div class="step">
+            <div class="step-icon">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="step-text">Escola Concluída com Sucesso!</div>
+          </div>
+          <div class="step">
+            <div class="step-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <div class="step-text">Faculdade Começando Agora!</div>
+          </div>
+        </div>
+
+        <div class="friend-message">
+          <h3>Da parte de um amigo...</h3>
+          <p>
+            Oi Susu! Como amigo, queria te parabenizar de um jeito especial por
+            essa conquista. Não é todo mundo que tem a determinação que você
+            tem!
+          </p>
+
+          <p>
+            Lembro de ver você se dedicando aos estudos, e agora ver você
+            entrando na faculdade é inspirador. Você é daquelas pessoas que
+            quando coloca uma meta na cabeça, vai até o fim!
+          </p>
+
+          <p>
+            Na faculdade, tenho certeza que você vai arrasar também. Novos
+            amigos, novos aprendizados, novas descobertas. Aproveita cada
+            momento, porque essa fase é única!
+          </p>
+
+          <p>
+            Se precisar de qualquer coisa, tamo aí! Para comemorações, para
+            desabafar sobre provas difíceis, ou só para dar risada. Amizade
+            também é isso!
+          </p>
+
+          <p>
+            Você merece todo sucesso do mundo! Vai com tudo, futura
+            profissional! 🚀
+          </p>
+
+          <div class="signature">Com amizade sempre! 💙</div>
+        </div>
+
+        <button class="whatsapp-share" id="shareBtn">
+          <i class="fab fa-whatsapp"></i> Compartilhar essa conquista!
+        </button>
+      </div>
+
+      <footer>
+        <p>Celebrando a formatura da My Susu ❤️ 🎓</p>
+        <p style="margin-top: 5px; font-size: 0.8rem">
+          Mensagem especial de um amigo ❤️
+        </p>
+      </footer>
     </div>
 
-    <div class="revealed-content" id="revealedContent">
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const surpriseBox = document.getElementById("surpriseBox");
+        const celebrationContent =
+          document.getElementById("celebrationContent");
+        const shareBtn = document.getElementById("shareBtn");
+        const uploadBtn = document.getElementById("uploadBtn");
+        const suelanePhoto = document.getElementById("suelanePhoto");
+        const photoPlaceholder = document.getElementById("photoPlaceholder");
+        let exploded = false;
 
-        <div class="message">
-            <h2>Um Domingo Especial 🌷</h2>
-            <p>Hanna, que seu domingo seja leve, tranquilo e cheio de paz.</p>
-            <p>Que cada detalhe do seu dia lembre o quanto você é especial.</p>
-            <p class="signature">Com carinho ❤️ Fábio</p>
-        </div>
+        // Função para toque/clique na caixa
+        surpriseBox.addEventListener("click", function () {
+          if (exploded) return;
 
-        <div class="single-photo">
-            <img src="./img/WhatsApp Image 2025-12-13 at 11.07.55.jpeg" alt="Hanna">
-        </div>
+          exploded = true;
 
-    </div>
+          // Adiciona classe para animação de explosão
+          this.classList.add("exploded");
 
-</div>
+          // Cria partículas de explosão
+          createExplosionParticles();
 
-<script>
-const surpriseBox = document.getElementById('surpriseBox');
-const revealedContent = document.getElementById('revealedContent');
-const boxLid = document.getElementById('boxLid');
+          // Após a explosão, mostra o conteúdo
+          setTimeout(function () {
+            celebrationContent.style.display = "block";
+            celebrationContent.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
 
-function createExplosion(x, y) {
-    const colors = ['#ff6b9d','#6a0dad','#ffeb3b','#ffffff'];
-    for(let i=0;i<40;i++){
-        const e = document.createElement('div');
-        e.className = 'explosion';
-        const size = Math.random()*12+5;
-        const angle = Math.random()*Math.PI*2;
-        const dist = Math.random()*150+50;
-        const color = colors[Math.floor(Math.random()*colors.length)];
+            // Cria emojis caindo
+            createEmojiRain();
+          }, 1200);
+        });
 
-        e.style.width = size+'px';
-        e.style.height = size+'px';
-        e.style.background = color;
-        e.style.left = x+'px';
-        e.style.top = y+'px';
+        // Botão para carregar foto
+        uploadBtn.addEventListener("click", function () {
+          // Cria um input de arquivo invisível
+          const fileInput = document.createElement("input");
+          fileInput.type = "file";
+          fileInput.accept = "image/*";
 
-        document.body.appendChild(e);
+          fileInput.onchange = function (event) {
+            const file = event.target.files[0];
+            if (file) {
+              const reader = new FileReader();
 
-        e.animate([
-            {transform:'translate(0,0)',opacity:1},
-            {transform:`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px)`,opacity:0}
-        ],{duration:800});
+              reader.onload = function (e) {
+                // Coloca a foto no lugar
+                suelanePhoto.src = e.target.result;
+                suelanePhoto.style.display = "block";
+                photoPlaceholder.style.display = "none";
 
-        setTimeout(()=>e.remove(),800);
-    }
-}
+                // Altera o botão
+                uploadBtn.innerHTML =
+                  '<i class="fas fa-sync-alt"></i> Trocar Foto';
+                uploadBtn.style.background = "#ff6b6b";
 
-surpriseBox.addEventListener('click', (e)=>{
-    const rect = surpriseBox.getBoundingClientRect();
-    createExplosion(e.clientX, e.clientY);
+                // Feedback
+                alert(
+                  "Foto carregada com sucesso! Agora a Suelane vai ver ela aqui!"
+                );
+              };
 
-    boxLid.style.transform = 'rotateX(-120deg)';
-    surpriseBox.style.transform = 'scale(1.3)';
+              reader.readAsDataURL(file);
+            }
+          };
 
-    setTimeout(()=>{
-        surpriseBox.style.display='none';
-        revealedContent.style.display='block';
-    },700);
-});
-</script>
+          fileInput.click();
+        });
 
-</body>
+        // Para você colocar uma foto diretamente (sem precisar carregar)
+        // Substitua o URL abaixo pelo link da foto da Suelane
+        // suelanePhoto.src = "COLE_AQUI_O_LINK_DA_FOTO_DA_SUELANE";
+
+        // Função para criar partículas de explosão
+        function createExplosionParticles() {
+          const colors = [
+            "#ff6b6b",
+            "#4ecdc4",
+            "#ffd166",
+            "#ff8e53",
+            "#00b09b",
+          ];
+          const boxRect = surpriseBox.getBoundingClientRect();
+          const centerX = boxRect.left + boxRect.width / 2;
+          const centerY = boxRect.top + boxRect.height / 2;
+
+          for (let i = 0; i < 40; i++) {
+            const particle = document.createElement("div");
+            particle.classList.add("explosion-particle");
+
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 120 + 40;
+            const size = Math.random() * 15 + 5;
+
+            particle.style.left = `${centerX}px`;
+            particle.style.top = `${centerY}px`;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.backgroundColor =
+              colors[Math.floor(Math.random() * colors.length)];
+
+            document.body.appendChild(particle);
+
+            const animation = particle.animate(
+              [
+                { transform: `translate(0, 0)`, opacity: 1 },
+                {
+                  transform: `translate(${Math.cos(angle) * distance}px, ${
+                    Math.sin(angle) * distance
+                  }px)`,
+                  opacity: 0,
+                },
+              ],
+              {
+                duration: 800,
+                easing: "cubic-bezier(0.1, 0.8, 0.2, 1)",
+              }
+            );
+
+            animation.onfinish = () => particle.remove();
+          }
+        }
+
+        // Função para criar chuva de emojis
+        function createEmojiRain() {
+          const emojis = [
+            "🎓",
+            "✨",
+            "🎉",
+            "🌟",
+            "❤️",
+            "🥳",
+            "🏆",
+            "📚",
+            "🎁",
+            "👏",
+          ];
+
+          for (let i = 0; i < 60; i++) {
+            const emoji = document.createElement("div");
+            emoji.classList.add("emoji-rain");
+            emoji.textContent =
+              emojis[Math.floor(Math.random() * emojis.length)];
+
+            const left = Math.random() * window.innerWidth;
+            const delay = Math.random() * 500;
+            const duration = Math.random() * 3000 + 2000;
+            const size = Math.random() * 20 + 15;
+
+            emoji.style.left = `${left}px`;
+            emoji.style.top = `-30px`;
+            emoji.style.fontSize = `${size}px`;
+
+            document.body.appendChild(emoji);
+
+            const endX =
+              Math.random() * window.innerWidth - window.innerWidth / 3;
+
+            const animation = emoji.animate(
+              [
+                { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                {
+                  transform: `translate(${endX}px, ${
+                    window.innerHeight + 100
+                  }px) rotate(${Math.random() * 720}deg)`,
+                  opacity: 0,
+                },
+              ],
+              {
+                duration: duration,
+                delay: delay,
+                easing: "cubic-bezier(0.1, 0.8, 0.2, 1)",
+              }
+            );
+
+            animation.onfinish = () => emoji.remove();
+          }
+        }
+
+        // Botão de compartilhar
+        shareBtn.addEventListener("click", function () {
+          const shareText =
+            "Olha que legal! Recebi uma mensagem especial comemorando minha formatura e o início da faculdade! 🎓✨";
+
+          if (navigator.share) {
+            navigator.share({
+              title: "Parabéns Susu! 🎓",
+              text: shareText,
+              url: window.location.href,
+            });
+            aInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const originalText = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<i class="fas fa-check"></i> Texto copiado!';
+            shareBtn.style.background = "#00b09b";
+
+            setTimeout(() => {
+              shareBtn.innerHTML = originalText;
+              shareBtn.style.background = "#25D366";
+            }, 2000);
+          }
+        });
+
+        // Adiciona alguns emojis no título
+        const title = document.querySelector("h1");
+        const emojis = [" 🎓", " ✨", " 💙"];
+        emojis.forEach((emoji) => {
+          title.innerHTML += emoji;
+        });
+      });
+    </script>
+  </body>
 </html>
